@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:md_flutter/module/auth/screen/onboarding/onboarding_view_model.dart';
+import 'package:md_flutter/utility/constant.dart';
 import 'package:provider/provider.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -81,26 +82,23 @@ class OnboardingBottomNavbar extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(16),
+                color: Constant.greenDark,
+                borderRadius: BorderRadius.circular(32),
               ),
               clipBehavior: Clip.hardEdge,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    viewModel.onTapNextPage(context: context);
-                  },
-                  splashColor: Colors.green,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
-                    child: Text(
-                      viewModel.currentPage == viewModel.onboardData.length - 1
-                          ? "Mulai Sekarang"
-                          : "Selanjutnya",
-                      style:
-                          const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600),
-                    ),
+              child: InkWell(
+                onTap: () {
+                  viewModel.onTapNextPage(context: context);
+                },
+                borderRadius: BorderRadius.circular(32),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
+                  child: Text(
+                    viewModel.currentPage == viewModel.onboardData.length - 1
+                        ? "Mulai Sekarang"
+                        : "Selanjutnya",
+                    style: const TextStyle(
+                        fontSize: 16, color: Colors.white, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
