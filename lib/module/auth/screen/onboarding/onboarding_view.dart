@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:md_flutter/module/auth/model/onboard_data.dart';
 import 'package:md_flutter/module/auth/screen/onboarding/onboarding_view_model.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:provider/provider.dart';
@@ -29,19 +30,20 @@ class OnboardingScreenView extends StatelessWidget {
         },
         child: Scaffold(
           backgroundColor: Colors.white,
-          bottomNavigationBar:
-              viewModel.onboardData.isNotEmpty ? const OnboardingBottomNavbar() : const SizedBox(),
+          bottomNavigationBar: viewModel.onboardDataList.isNotEmpty
+              ? const OnboardingBottomNavbar()
+              : const SizedBox(),
           body: SafeArea(
-              child: viewModel.onboardData.isNotEmpty
+              child: viewModel.onboardDataList.isNotEmpty
                   ? PageView.builder(
                       controller: viewModel.pageBoardController,
                       onPageChanged: (value) {
                         viewModel.onPageChanged(value);
                       },
-                      itemCount: viewModel.onboardData.length,
+                      itemCount: viewModel.onboardDataList.length,
                       itemBuilder: (context, index) {
-                        Map item = viewModel.onboardData[index];
-                        return OnboardingContent(title: item['desc'], image: item['image']);
+                        OnboardData item = viewModel.onboardDataList[index];
+                        return OnboardingContent(title: item.desc, image: item.image);
                       },
                     )
                   : const SizedBox()),
@@ -66,7 +68,7 @@ class OnboardingBottomNavbar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                viewModel.onboardData.length,
+                viewModel.onboardDataList.length,
                 (index) => AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   margin: const EdgeInsets.only(right: 5),
@@ -94,7 +96,7 @@ class OnboardingBottomNavbar extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 16),
                   child: Text(
-                    viewModel.currentPage == viewModel.onboardData.length - 1
+                    viewModel.currentPage == viewModel.onboardDataList.length - 1
                         ? "Mulai Sekarang"
                         : "Selanjutnya",
                     style: const TextStyle(

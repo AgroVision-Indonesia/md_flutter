@@ -2,27 +2,33 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:md_flutter/module/auth/model/onboard_data.dart';
 
 class OnboardingViewModel extends ChangeNotifier {
   bool statusClose = false;
   int currentPage = 0;
   final PageController pageBoardController = PageController(initialPage: 0);
-  List onboardData = [
-    {
-      'image': 'assets/onboarding/onboard_1.png',
-      'desc': 'Selamat datang di AgroVision! Mari mulai ....'
-    },
-    {
-      'image': 'assets/onboarding/onboard_2.png',
-      'desc': 'Temukan kematangan optimal buah dan tangani penyakit tanaman secara efektif'
-    },
-    {
-      'image': 'assets/onboarding/onboard_3.png',
-      'desc': 'Tingkatkan hasil panen anda dengan Agrovision'
-    },
-  ];
+  List<OnboardData> onboardDataList = [];
 
-  OnboardingViewModel() {}
+  OnboardingViewModel() {
+    List tempData = [
+      {
+        'image': 'assets/onboarding/onboard_1.png',
+        'desc': 'Selamat datang di AgroVision! Mari mulai ....'
+      },
+      {
+        'image': 'assets/onboarding/onboard_2.png',
+        'desc': 'Temukan kematangan optimal buah dan tangani penyakit tanaman secara efektif'
+      },
+      {
+        'image': 'assets/onboarding/onboard_3.png',
+        'desc': 'Tingkatkan hasil panen anda dengan Agrovision'
+      },
+    ];
+    for (var i = 0; i < tempData.length; i++) {
+      onboardDataList.add(OnboardData.fromJson(tempData[i]));
+    }
+  }
 
   void close() {
     var duration = const Duration(seconds: 2);
@@ -67,13 +73,13 @@ class OnboardingViewModel extends ChangeNotifier {
   }
 
   void onTapNextPage({required BuildContext context}) {
-    if (currentPage < onboardData.length - 1) {
+    if (currentPage < onboardDataList.length - 1) {
       pageBoardController.nextPage(
         duration: const Duration(milliseconds: 200),
         curve: Curves.ease,
       );
     }
-    if (currentPage == onboardData.length - 1) {
+    if (currentPage == onboardDataList.length - 1) {
       // Navigator.of(context).pushNamed('/onboarding2');
     }
     notifyListeners();
