@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:md_flutter/module/auth/screen/home/components/card_article.dart';
+import 'package:md_flutter/module/home/screen/home/components/card_article.dart';
 import 'package:md_flutter/utility/constant.dart';
 
 class Home extends StatefulWidget {

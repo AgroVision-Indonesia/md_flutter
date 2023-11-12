@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:md_flutter/module/auth/screen/main_menu/main_menu_view.dart';
+import 'package:md_flutter/module/home/screen/main_menu/main_menu_view.dart';
 import 'package:md_flutter/module/auth/screen/splash_screen/splash_screen_view.dart';
 import 'package:md_flutter/utility/theme.dart';
 import 'package:provider/provider.dart';
