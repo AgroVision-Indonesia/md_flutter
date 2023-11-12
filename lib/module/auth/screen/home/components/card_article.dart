@@ -49,13 +49,13 @@ class _CardArticleState extends State<CardArticle> {
               end: Alignment.topCenter,
             ),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 'loremipsum',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                 ),

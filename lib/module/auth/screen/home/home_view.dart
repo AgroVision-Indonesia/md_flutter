@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
 
   Widget buildAppbar() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -39,10 +39,10 @@ class _HomeState extends State<Home> {
 
   Widget buildCardDashboard() {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.symmetric(horizontal: 24),
       elevation: 10.0,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
@@ -64,13 +64,13 @@ class _HomeState extends State<Home> {
                 )
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Hello, ',
                       style: TextStyle(
                         fontSize: 16,
@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                   decoration: BoxDecoration(
                     border: Border.all(width: 0.5),
                     borderRadius: BorderRadius.circular(10),
@@ -94,10 +94,10 @@ class _HomeState extends State<Home> {
                   child: Row(
                     children: [
                       Image.asset('assets/logo/logo_av.png', width: 16),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Text(
                         '${userData['token']} token',
-                        style: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
+                        style: const TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
                       ),
                     ],
                   ),
@@ -106,9 +106,9 @@ class _HomeState extends State<Home> {
             ),
             Text(
               'Kamu telah menggunakan ${userData['token_used_today']} token hari ini',
-              style: TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
+              style: const TextStyle(fontSize: 8, fontWeight: FontWeight.w300),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
           ],
         ),
       ),
@@ -117,8 +117,8 @@ class _HomeState extends State<Home> {
 
   Widget buildCardDetection() {
     return Container(
-      margin: EdgeInsets.only(right: 54, left: 54),
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+      margin: const EdgeInsets.only(right: 54, left: 54),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         color: Constant.greenMedium,
@@ -129,8 +129,8 @@ class _HomeState extends State<Home> {
             'assets/main_menu/img_lamp.png',
             width: 32,
           ),
-          SizedBox(width: 6),
-          Flexible(
+          const SizedBox(width: 6),
+          const Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -153,8 +153,8 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          SizedBox(width: 6),
-          Icon(IconlyBroken.arrow_right, color: Colors.white),
+          const SizedBox(width: 6),
+          const Icon(IconlyBroken.arrow_right, color: Colors.white),
         ],
       ),
     );
@@ -162,16 +162,16 @@ class _HomeState extends State<Home> {
 
   Widget buildTitle({required String title}) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
               color: Constant.greenMoreLight,
               borderRadius: BorderRadius.circular(24),
@@ -191,10 +191,10 @@ class _HomeState extends State<Home> {
 
   Widget buildSubtitle({required String subtitle}) {
     return Container(
-      margin: EdgeInsets.only(top: 12, right: 24, left: 24, bottom: 12),
+      margin: const EdgeInsets.only(top: 12, right: 24, left: 24, bottom: 12),
       child: Text(
         subtitle,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 10,
         ),
       ),
@@ -210,7 +210,7 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.only(left: 24, right: 12),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return CardArticle();
+          return const CardArticle();
         },
       ),
     );
@@ -218,7 +218,7 @@ class _HomeState extends State<Home> {
 
   Widget buildArtikel() {
     return Container(
-      margin: EdgeInsets.only(top: 24),
+      margin: const EdgeInsets.only(top: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -242,7 +242,7 @@ class _HomeState extends State<Home> {
             Stack(
               children: [
                 buildCardDashboard(),
-                Container(margin: EdgeInsets.only(top: 100), child: buildCardDetection()),
+                Container(margin: const EdgeInsets.only(top: 100), child: buildCardDetection()),
               ],
             ),
             buildArtikel(),

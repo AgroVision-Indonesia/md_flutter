@@ -21,9 +21,9 @@ class _MainMenuState extends State<MainMenu> {
 
   Widget body() {
     List pages = [
-      Home(),
-      Home(),
-      Home(),
+      const Home(),
+      const Home(),
+      const Home(),
     ];
 
     return DefaultTabController(
