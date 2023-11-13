@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:md_flutter/module/auth/model/onboard_data.dart';
+import 'package:md_flutter/module/auth/screen/login/login_view.dart';
 
 class OnboardingViewModel extends ChangeNotifier {
   bool statusClose = false;
@@ -80,7 +82,9 @@ class OnboardingViewModel extends ChangeNotifier {
       );
     }
     if (currentPage == onboardDataList.length - 1) {
-      // Navigator.of(context).pushNamed('/onboarding2');
+      Navigator.of(context).push(CupertinoPageRoute(
+        builder: (context) => const LoginScreen(),
+      ));
     }
     notifyListeners();
   }
