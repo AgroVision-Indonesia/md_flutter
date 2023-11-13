@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         title: 'AgroVision',
         debugShowCheckedModeBanner: false,
-        initialRoute: '/splashScreen',
+        initialRoute: '/mainMenu',
         routes: routes,
         key: mainKey,
         navigatorKey: navigatorKey,

@@ -8,6 +8,7 @@ class Constant {
   static Color green = const Color.fromRGBO(76, 175, 80, 1);
   static Color greenLight = const Color.fromRGBO(139, 195, 74, 1);
   static Color greenMoreLight = const Color.fromRGBO(190, 255, 224, 1);
+  static Color greenMoreVeryLight = const Color.fromRGBO(246, 255, 242, 1);
 
   static Color yellowMedium = const Color.fromRGBO(255, 139, 7, 1);
   static Color cream = const Color.fromRGBO(230, 147, 98, 1);
