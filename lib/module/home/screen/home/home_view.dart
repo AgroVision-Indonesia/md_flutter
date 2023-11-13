@@ -236,6 +236,19 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: SizedBox(
+          height: 64,
+          width: 64,
+          child: FittedBox(
+            child: FloatingActionButton(
+              shape: const CircleBorder(side: BorderSide(color: Colors.transparent)),
+              onPressed: () {},
+              child: Image.asset(
+                'assets/main_menu/icon_chatbot.png',
+              ),
+            ),
+          ),
+        ),
         body: ListView(
           children: [
             buildAppbar(),

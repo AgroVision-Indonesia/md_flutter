@@ -29,15 +29,15 @@ class _DetectionHomeState extends State<DetectionHome> {
   }
 
   Widget buildWelcome() {
-    return Column(
+    return const Column(
       children: [
-        const Text(
+        Text(
           'Selamat datang di Deteksi!',
           style: TextStyle(
             fontSize: 16,
           ),
         ),
-        const Text(
+        Text(
           'Apa yang ingin kamu deteksi hari ini?',
           style: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
         ),
@@ -56,7 +56,7 @@ class _DetectionHomeState extends State<DetectionHome> {
       margin: const EdgeInsets.symmetric(horizontal: 24),
       elevation: 10.0,
       child: Container(
-        padding: EdgeInsets.only(right: 24, left: 24, bottom: 16, top: 32),
+        padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16, top: 32),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
@@ -64,7 +64,7 @@ class _DetectionHomeState extends State<DetectionHome> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 20, right: 6, left: 6, bottom: 2),
+              padding: const EdgeInsets.only(top: 20, right: 6, left: 6, bottom: 2),
               width: 72,
               height: 72,
               decoration: BoxDecoration(
@@ -73,31 +73,31 @@ class _DetectionHomeState extends State<DetectionHome> {
               ),
               child: Image.asset(imageAsset),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
               ),
             ),
-            SizedBox(height: 2),
+            const SizedBox(height: 2),
             Text(
               subtitle,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             InkWell(
               customBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
               ),
               onTap: onTap,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 24),
-                constraints: BoxConstraints(
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
+                constraints: const BoxConstraints(
                   maxWidth: double.infinity,
                 ),
                 decoration: BoxDecoration(
@@ -109,7 +109,7 @@ class _DetectionHomeState extends State<DetectionHome> {
                 ),
                 child: Text(
                   buttonLabel,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
                   ),
@@ -127,7 +127,7 @@ class _DetectionHomeState extends State<DetectionHome> {
       margin: const EdgeInsets.symmetric(horizontal: 24),
       elevation: 10.0,
       child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
@@ -135,8 +135,8 @@ class _DetectionHomeState extends State<DetectionHome> {
           child: Row(
             children: [
               Image.asset('assets/detection_home/img_detection_request.png', width: 50),
-              SizedBox(width: 12),
-              Flexible(
+              const SizedBox(width: 12),
+              const Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -177,7 +177,7 @@ class _DetectionHomeState extends State<DetectionHome> {
             //     height: 400,
             //   ),
             // ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             buildCardDetection(
               title: 'Deteksi kematangan buah',
               subtitle: 'Ketahui kualitas buahmu dengan melakukan identifikasi kematangannya!',
@@ -185,7 +185,7 @@ class _DetectionHomeState extends State<DetectionHome> {
               buttonLabel: 'Pilih buah',
               onTap: () {},
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             buildCardDetection(
               title: 'Deteksi penyakit tanaman',
               subtitle: 'Cegah lebih awal dengan mengetahui daignosis penyakit pada tanamanmu!',
@@ -193,7 +193,7 @@ class _DetectionHomeState extends State<DetectionHome> {
               buttonLabel: 'Pilih tanaman',
               onTap: () {},
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             buildCardRequest(),
           ],
         ),
