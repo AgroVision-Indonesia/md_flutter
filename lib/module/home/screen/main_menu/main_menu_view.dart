@@ -30,48 +30,63 @@ class _MainMenuState extends State<MainMenu> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          // selectedFontSize: 12,
-          // unselectedFontSize: 12,
-          // selectedLabelStyle: TextStyle(color: Constant.greenMedium),
-          // selectedItemColor: Constants.redonesmile,
-          showUnselectedLabels: false,
-          showSelectedLabels: false,
-          backgroundColor: Constant.greenDark,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 8.0,
+                spreadRadius: 2.0,
+                offset: Offset(0, 0),
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            selectedFontSize: 10,
+            unselectedFontSize: 10,
+            selectedLabelStyle: TextStyle(color: Constant.greenDark),
+            selectedItemColor: Constant.greenDark,
+            // showUnselectedLabels: false,
+            // showSelectedLabels: false,
+            backgroundColor: Colors.white,
 
-          type: BottomNavigationBarType.fixed,
-          elevation: 0.0,
-          currentIndex: selectedIndex,
-          onTap: onItemTapped,
-          items: [
-            BottomNavigationBarItem(
-              icon: selectedIndex == 0
-                  ? const Icon(IconlyLight.home)
-                  : const Icon(
-                      IconlyBroken.home,
-                      color: Colors.white,
-                    ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: selectedIndex == 1
-                  ? const Icon(IconlyLight.scan)
-                  : const Icon(
-                      IconlyBroken.scan,
-                      color: Colors.white,
-                    ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: selectedIndex == 2
-                  ? const Icon(IconlyLight.profile)
-                  : const Icon(
-                      IconlyBroken.profile,
-                      color: Colors.white,
-                    ),
-              label: '',
-            ),
-          ],
+            type: BottomNavigationBarType.fixed,
+            elevation: 0.0,
+            currentIndex: selectedIndex,
+            onTap: onItemTapped,
+            items: [
+              BottomNavigationBarItem(
+                icon: selectedIndex == 0
+                    ? Icon(
+                        IconlyLight.home,
+                      )
+                    : const Icon(
+                        IconlyBroken.home,
+                      ),
+                label: 'Beranda',
+              ),
+              BottomNavigationBarItem(
+                icon: selectedIndex == 1
+                    ? Icon(
+                        IconlyLight.scan,
+                      )
+                    : const Icon(
+                        IconlyBroken.scan,
+                      ),
+                label: 'Deteksi',
+              ),
+              BottomNavigationBarItem(
+                icon: selectedIndex == 2
+                    ? Icon(
+                        IconlyLight.profile,
+                      )
+                    : const Icon(
+                        IconlyBroken.profile,
+                      ),
+                label: 'Profil',
+              ),
+            ],
+          ),
         ),
         body: pages[selectedIndex],
       ),
