@@ -56,67 +56,92 @@ class _DetectionHomeState extends State<DetectionHome> {
       margin: const EdgeInsets.symmetric(horizontal: 24),
       elevation: 10.0,
       child: Container(
-        padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16, top: 32),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
         ),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 20, right: 6, left: 6, bottom: 2),
-              width: 72,
-              height: 72,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Constant.greenMoreVeryLight,
-              ),
-              child: Image.asset(imageAsset),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            const SizedBox(height: 4),
-            InkWell(
-              customBorder: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32),
-              ),
-              onTap: onTap,
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
-                constraints: const BoxConstraints(
-                  maxWidth: double.infinity,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32),
-                  border: Border.all(
-                    width: 0.5,
-                    color: Constant.greenDark,
-                  ),
-                ),
-                child: Text(
-                  buttonLabel,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w400,
-                  ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Column(
+            children: [
+              Container(
+                height: 96,
+                child: Stack(
+                  children: [
+                    ClipPath(
+                      clipper: CustomClipPath(),
+                      child: Container(
+                        color: Constant.greenDark,
+                        height: 60,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 20, right: 6, left: 6, bottom: 2),
+                        width: 72,
+                        height: 72,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Constant.greenMoreVeryLight,
+                        ),
+                        child: Image.asset(imageAsset),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Container(
+                padding: EdgeInsets.only(top: 4, left: 24, right: 24, bottom: 16),
+                child: Column(
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      subtitle,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    InkWell(
+                      customBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      onTap: onTap,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
+                        constraints: const BoxConstraints(
+                          maxWidth: double.infinity,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(32),
+                          border: Border.all(
+                            width: 0.5,
+                            color: Constant.greenDark,
+                          ),
+                        ),
+                        child: Text(
+                          buttonLabel,
+                          style: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -205,26 +230,21 @@ class _DetectionHomeState extends State<DetectionHome> {
 class CustomClipPath extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    double w = size.width;
-    double h = size.height;
-
-    final path = Path();
-
-    path.lineTo(0, h);
-    path.quadraticBezierTo(
-      w * 50,
-      h - 100,
-      w,
-      h,
-    );
-    path.lineTo(w, 0);
-    path.close();
+    final path = Path()
+      ..lineTo(0, size.height - 20) // Line to bottom-left
+      ..quadraticBezierTo(
+        size.width / 2,
+        size.height + 20,
+        size.width,
+        size.height - 20,
+      ) // Quadratic Bezier to bottom-right
+      ..lineTo(size.width, 0); // Line to top-right
 
     return path;
   }
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
+    return false;
   }
 }
