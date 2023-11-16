@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:md_flutter/module/chatbot/screen/chat/chatbot_view.dart';
 import 'package:md_flutter/module/home/screen/home/components/card_article.dart';
 import 'package:md_flutter/utility/constant.dart';
 
@@ -242,7 +244,11 @@ class _HomeState extends State<Home> {
           child: FittedBox(
             child: FloatingActionButton(
               shape: const CircleBorder(side: BorderSide(color: Colors.transparent)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => ChatBotScreen(),
+                ));
+              },
               child: Image.asset(
                 'assets/main_menu/icon_chatbot.png',
               ),

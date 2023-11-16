@@ -45,6 +45,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   iconly: ^1.0.1
   cached_network_image: ^3.3.0
+  loading_overlay: ^0.3.0
+  url_launcher: ^6.2.1
+  localstorage: ^4.0.1+4
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +80,7 @@ flutter:
   assets:
     - assets/onboarding/
     - assets/logo/
+    - assets/chatbot/
     - assets/main_menu/
     - assets/auth/
     - assets/detection_home/

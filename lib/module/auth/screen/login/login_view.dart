@@ -125,6 +125,9 @@ class LoginView extends StatelessWidget {
                       height: 24,
                     ),
                     InkWell(
+                      onTap: () {
+                        viewModel.onCallBackLogin(context: context);
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.symmetric(vertical: 14),
