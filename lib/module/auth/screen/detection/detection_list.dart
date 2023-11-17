@@ -107,36 +107,55 @@ class _DetectionListState extends State<DetectionList> {
       margin: EdgeInsets.only(top: 12, right: 24, left: 24),
       elevation: 10,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CachedNetworkImage(
-              width: 40,
-              height: 40,
-              imageUrl: data['imgUrl'],
-              imageBuilder: (context, imageProvider) {
-                return Container(
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    // image: DecorationImage(image: imageProvider),
-                    color: Colors.white,
-                    border: Border.all(width: 1, color: Constant.greenDark),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: imageProvider),
-                    ),
-                  ),
-                );
-              },
+            Row(
+              children: [
+                CachedNetworkImage(
+                  width: 40,
+                  height: 40,
+                  imageUrl: data['imgUrl'],
+                  imageBuilder: (context, imageProvider) {
+                    return Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        // image: DecorationImage(image: imageProvider),
+                        color: Colors.white,
+                        border: Border.all(width: 1, color: Constant.greenDark),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: imageProvider),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(width: 12),
+                Text(data['title']),
+              ],
             ),
-            SizedBox(width: 12),
-            Text(data['title']),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Constant.greenDark),
+                borderRadius: BorderRadius.circular(32),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              child: Text(
+                'Deteksi',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
           ],
         ),
       ),
