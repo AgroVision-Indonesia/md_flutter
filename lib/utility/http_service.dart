@@ -17,8 +17,8 @@ class HttpService {
   static const String baseUrlDetection = 'https://predict-ux6r5xau3q-et.a.run.app/';
 
   Future<dynamic> post(String desturl,
-      {Map<String, String> headers = const {},
-      Map<String, String> body = const {},
+      {Map headers = const {},
+      Map body = const {},
       dynamic encoding}) async {
     Map<String, String> requestHeaders = {
       "Content-type": "application/json",

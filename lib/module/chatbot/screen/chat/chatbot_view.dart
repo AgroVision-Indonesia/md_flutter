@@ -14,7 +14,7 @@ class ChatBotScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ChatBotViewModel>(
       create: (context) {
-        return ChatBotViewModel();
+        return ChatBotViewModel(context: context);
       },
       builder: (context, child) => ChatBotView(),
     );
@@ -163,7 +163,7 @@ class ChatBotView extends StatelessWidget {
                                     iconSize: 40,
                                     color: Theme.of(context).primaryColor,
                                     onPressed: () {
-                                      //TODO
+                                      viewModel.postMessage();
                                     },
                                   ),
                                 ],
