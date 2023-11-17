@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:md_flutter/module/auth/screen/detection/detection_list.dart';
 import 'package:md_flutter/utility/constant.dart';
+import 'package:md_flutter/utility/http_service.dart';
 
 class DetectionHome extends StatefulWidget {
   const DetectionHome({super.key});
@@ -195,20 +199,20 @@ class _DetectionHomeState extends State<DetectionHome> {
           children: [
             buildAppbar(),
             buildWelcome(),
-            // ClipPath(
-            //   clipper: CustomClipPath(),
-            //   child: Container(
-            //     color: Colors.blue,
-            //     height: 400,
-            //   ),
-            // ),
             const SizedBox(height: 24),
             buildCardDetection(
               title: 'Deteksi kematangan buah',
               subtitle: 'Ketahui kualitas buahmu dengan melakukan identifikasi kematangannya!',
               imageAsset: 'assets/detection_home/img_detection_buah.png',
               buttonLabel: 'Pilih buah',
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetectionList(indexDetection: 1),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 24),
             buildCardDetection(
@@ -216,7 +220,14 @@ class _DetectionHomeState extends State<DetectionHome> {
               subtitle: 'Cegah lebih awal dengan mengetahui daignosis penyakit pada tanamanmu!',
               imageAsset: 'assets/detection_home/img_detection_tanaman.png',
               buttonLabel: 'Pilih tanaman',
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DetectionList(indexDetection: 0),
+                  ),
+                );
+              },
             ),
             const SizedBox(height: 24),
             buildCardRequest(),

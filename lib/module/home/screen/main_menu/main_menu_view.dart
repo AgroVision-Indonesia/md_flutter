@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:md_flutter/module/home/screen/home/home_view.dart';
-import 'package:md_flutter/module/auth/screen/detection_home/detection_home_view.dart';
+import 'package:md_flutter/module/auth/screen/detection/detection_home_view.dart';
 import 'package:md_flutter/utility/constant.dart';
 
 class MainMenu extends StatefulWidget {

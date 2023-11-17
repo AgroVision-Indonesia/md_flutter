@@ -14,6 +14,7 @@ class HttpService {
   final JsonDecoder _decoder = const JsonDecoder();
 
   static const String baseUrlChatBot = 'https://chatbot-agrovision-ux6r5xau3q-uc.a.run.app';
+  static const String baseUrlDetection = 'https://predict-ux6r5xau3q-et.a.run.app/';
 
   Future<dynamic> post(String desturl,
       {Map<String, String> headers = const {},
