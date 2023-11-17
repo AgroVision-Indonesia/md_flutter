@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 import 'package:md_flutter/component/image_picker_handler.dart';
+import 'package:md_flutter/utility/constant.dart';
 
 class ImagePickerDialog extends StatelessWidget {
   ImagePickerHandler? _listener;
@@ -103,21 +105,37 @@ class ImagePickerDialog extends StatelessWidget {
                   //  _type == 1
                   //     ? _listener.openCamera()
                   //     : _listener.openCamera2(),
-                  child: roundedButton("Camera", EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      const Color(0xffed1c24), const Color(0xFFFFFFFF)),
+                  child: roundedButton(
+                    "Camera",
+                    EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                    Constant.greenDark,
+                    const Color(0xFFFFFFFF),
+                    icon: Icon(
+                      IconlyLight.camera,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () => _listener?.openGallery(),
                   // _type == 1
                   //     ? _listener.openGallery()
                   //     : _listener.openGallery2(),
-                  child: roundedButton("Gallery", EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      const Color(0xffed1c24), const Color(0xFFFFFFFF)),
+                  child: roundedButton(
+                    "Gallery",
+                    EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                    Constant.greenDark,
+                    const Color(0xFFFFFFFF),
+                    icon: Icon(
+                      IconlyLight.image,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () => dismissDialog(),
                   child: roundedButton("Cancel", EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      const Color(0xffed1c24), const Color(0xFFFFFFFF)),
+                      Colors.white, Constant.greenDark),
                 ),
               ],
             ),
@@ -125,25 +143,39 @@ class ImagePickerDialog extends StatelessWidget {
         ));
   }
 
-  Widget roundedButton(String buttonLabel, EdgeInsets margin, Color bgColor, Color textColor) {
+  Widget roundedButton(
+    String buttonLabel,
+    EdgeInsets margin,
+    Color bgColor,
+    Color textColor, {
+    Icon? icon,
+  }) {
     return Container(
       margin: margin,
       padding: EdgeInsets.all(15.0),
       alignment: FractionalOffset.center,
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.all(const Radius.circular(100.0)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: const Color(0xFF696969),
-            offset: Offset(0.5, 0.5),
-            blurRadius: 0.001,
+        borderRadius: BorderRadius.all(const Radius.circular(20.0)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (icon != null)
+            Container(
+              margin: EdgeInsets.only(right: 8),
+              child: icon,
+            ),
+          Text(
+            buttonLabel,
+            style: new TextStyle(
+              color: textColor,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
-      ),
-      child: Text(
-        buttonLabel,
-        style: new TextStyle(color: textColor, fontSize: 18.0, fontWeight: FontWeight.bold),
       ),
     );
   }

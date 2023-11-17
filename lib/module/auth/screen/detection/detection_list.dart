@@ -1,8 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:md_flutter/component/image_picker_handler.dart';
+import 'package:md_flutter/module/auth/screen/detection/detection_preview.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:md_flutter/utility/http_service.dart';
 
@@ -20,11 +23,17 @@ class DetectionList extends StatefulWidget {
   State<DetectionList> createState() => _DetectionListState();
 }
 
-class _DetectionListState extends State<DetectionList> {
+class _DetectionListState extends State<DetectionList>
+    with TickerProviderStateMixin, ImagePickerListener {
   HttpService http = HttpService();
   bool isLoading = false;
 
   Map detectionModels = {};
+  Map selectedModel = {};
+
+  AnimationController? animationController;
+  ImagePickerHandler? imagePicker;
+
   // list model bentuknya masih map
 
   List wordings = [
@@ -43,7 +52,21 @@ class _DetectionListState extends State<DetectionList> {
   @override
   void initState() {
     getDetectionData();
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    imagePicker = ImagePickerHandler(this, animationController);
+    imagePicker!.init();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController?.dispose();
+    super.dispose();
   }
 
   Future getDetectionData() {
@@ -67,7 +90,7 @@ class _DetectionListState extends State<DetectionList> {
       });
     }).catchError(
       (err) {
-        log("error profile $err");
+        log("error detection-data $err");
         setState(() {
           isLoading = false;
         });
@@ -142,17 +165,25 @@ class _DetectionListState extends State<DetectionList> {
                 Text(data['title']),
               ],
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Constant.greenDark),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              child: Text(
-                'Deteksi',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w400,
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedModel = data;
+                });
+                imagePicker!.showDialog(context);
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Constant.greenDark),
+                  borderRadius: BorderRadius.circular(32),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                child: Text(
+                  'Deteksi',
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
@@ -170,7 +201,7 @@ class _DetectionListState extends State<DetectionList> {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          log('detectiondata index $index');
+          // log('detectiondata index $index');
           String key = (index + 1).toString();
           return buildCardDetectionModel(data: detectionModels[key]);
         },
@@ -180,25 +211,25 @@ class _DetectionListState extends State<DetectionList> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          leading: IconButton(
-            icon: Icon(IconlyLight.arrow_left_2),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          centerTitle: true,
-          title: Text(
-            'Deteksi',
-            style: TextStyle(fontSize: 16),
-          ),
+        elevation: 0.0,
+        leading: IconButton(
+          icon: Icon(IconlyLight.arrow_left_2),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: ListView(
+        centerTitle: true,
+        title: Text(
+          'Deteksi',
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+      body: SafeArea(
+        child: ListView(
           children: [
             buildWording(),
             buildDetectionModelList(),
@@ -206,5 +237,22 @@ class _DetectionListState extends State<DetectionList> {
         ),
       ),
     );
+  }
+
+  @override
+  userImage(File _image, int type) {
+    String fileName = _image.path.split("/").last;
+    File imageFile = _image;
+
+    if (selectedModel.isNotEmpty)
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetectionPreview(
+            selectedModel: selectedModel,
+            imageFile: imageFile,
+          ),
+        ),
+      );
   }
 }
