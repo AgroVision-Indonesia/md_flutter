@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:md_flutter/utility/constant.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class DetectionResult extends StatefulWidget {
   const DetectionResult({
@@ -145,6 +146,59 @@ class _DetectionResultState extends State<DetectionResult> {
     );
   }
 
+  alertClose({
+    required String title,
+    required String message,
+    required BuildContext context,
+    String firstButtonLabel = 'Lanjutkan',
+    String secondButtonLabel = 'Batal',
+    required Function() firstButtonOnTap,
+    required Function() secondButtonOnTap,
+  }) {
+    Alert(
+      context: context,
+      // type: AlertType.info,
+      style: AlertStyle(
+        isCloseButton: false,
+        titleStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        titlePadding: EdgeInsets.only(bottom: 8, top: 10),
+      ),
+      title: title,
+      content: Text(
+        message,
+        style: TextStyle(fontSize: 14),
+      ),
+      buttons: [
+        DialogButton(
+          radius: BorderRadius.circular(16),
+          child: Text(
+            firstButtonLabel,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          onPressed: firstButtonOnTap,
+          color: Constant.greenDark,
+        ),
+        DialogButton(
+          radius: BorderRadius.circular(16),
+          child: Text(
+            secondButtonLabel,
+            style: TextStyle(
+              color: Constant.greenDark,
+            ),
+          ),
+          onPressed: secondButtonOnTap,
+          color: Colors.white,
+          border: Border.all(
+            width: 1,
+            color: Constant.greenDark,
+          ),
+        ),
+      ],
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +209,19 @@ class _DetectionResultState extends State<DetectionResult> {
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () {
-            Navigator.pop(context);
+            alertClose(
+              title: 'Konfirmasi',
+              message:
+                  'Apakah Anda yakin ingin keluar dari halaman ini? Hasil deteksi tidak tersimpan.',
+              context: context,
+              firstButtonOnTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              secondButtonOnTap: () {
+                Navigator.of(context).pop();
+              },
+            );
           },
         ),
         centerTitle: true,

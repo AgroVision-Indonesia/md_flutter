@@ -5,9 +5,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:md_flutter/component/image_picker_handler.dart';
+import 'package:md_flutter/component/loading_overlay.dart';
 import 'package:md_flutter/module/auth/screen/detection/detection_preview.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:md_flutter/utility/http_service.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class DetectionList extends StatefulWidget {
   const DetectionList({
@@ -219,7 +221,7 @@ class _DetectionListState extends State<DetectionList>
         leading: IconButton(
           icon: Icon(IconlyLight.arrow_left_2),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop();
           },
         ),
         centerTitle: true,
@@ -229,11 +231,14 @@ class _DetectionListState extends State<DetectionList>
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          children: [
-            buildWording(),
-            buildDetectionModelList(),
-          ],
+        child: LoadingFallback(
+          isLoading: isLoading,
+          child: ListView(
+            children: [
+              buildWording(),
+              buildDetectionModelList(),
+            ],
+          ),
         ),
       ),
     );

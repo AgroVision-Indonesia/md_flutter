@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:md_flutter/component/loading_overlay.dart';
 import 'package:md_flutter/module/auth/screen/detection/detection_result.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:md_flutter/utility/http_service.dart';
@@ -161,27 +162,30 @@ class _DetectionPreviewState extends State<DetectionPreview> {
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          children: [
-            buildImagePreview(),
-            SizedBox(height: 48),
-            buildButton(
-              buttonLabel: "Unggah",
-              onTap: () {
-                if (imageFile != null) postDetection();
-              },
-            ),
-            SizedBox(height: 12),
-            buildButton(
-              buttonLabel: "Ulang",
-              onTap: () {
-                Navigator.pop(context);
-              },
-              backgroundColor: Colors.white,
-              labelColor: Constant.greenDark,
-            ),
-            SizedBox(height: 64),
-          ],
+        child: LoadingFallback(
+          isLoading: isLoading,
+          child: ListView(
+            children: [
+              buildImagePreview(),
+              SizedBox(height: 48),
+              buildButton(
+                buttonLabel: "Unggah",
+                onTap: () {
+                  if (imageFile != null) postDetection();
+                },
+              ),
+              SizedBox(height: 12),
+              buildButton(
+                buttonLabel: "Ulang",
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                backgroundColor: Colors.white,
+                labelColor: Constant.greenDark,
+              ),
+              SizedBox(height: 64),
+            ],
+          ),
         ),
       ),
     );
