@@ -12,11 +12,11 @@ class CardArticle extends StatefulWidget {
 class _CardArticleState extends State<CardArticle> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          padding: const EdgeInsets.only(right: 12),
-          child: AspectRatio(
+    return Container(
+      padding: const EdgeInsets.only(right: 12),
+      child: Stack(
+        children: [
+          AspectRatio(
             aspectRatio: 16 / 8,
             child: CachedNetworkImage(
               width: MediaQuery.of(context).size.width * 0.7,
@@ -31,39 +31,42 @@ class _CardArticleState extends State<CardArticle> {
               },
             ),
           ),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.7,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(
-              colors: [
-                Colors.black.withOpacity(0.7),
-                Colors.black.withOpacity(0.6),
-                Colors.black.withOpacity(0.2),
-                Colors.black.withOpacity(0.1),
-                Colors.black.withOpacity(0.0),
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-          ),
-          child: const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'loremipsum',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
+          AspectRatio(
+            aspectRatio: 16 / 8,
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.7,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.black.withOpacity(0.7),
+                    Colors.black.withOpacity(0.6),
+                    Colors.black.withOpacity(0.2),
+                    Colors.black.withOpacity(0.1),
+                    Colors.black.withOpacity(0.0),
+                  ],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
                 ),
               ),
-            ],
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'loremipsum',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
