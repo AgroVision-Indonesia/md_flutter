@@ -96,8 +96,14 @@ class CardSaveNewDataOptions extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     final viewModel = context.watch<MainProfileViewModel>();
     return Card(
+      elevation: 10.0,
+      color: Colors.white,
       child: Container(
         width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -164,8 +170,14 @@ class CardMoreOptions extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     final viewModel = context.watch<MainProfileViewModel>();
     return Card(
+      elevation: 10.0,
+      color: Colors.white,
       child: Container(
         width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,8 +233,14 @@ class CardUserEditSection extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     final viewModel = context.watch<MainProfileViewModel>();
     return Card(
+      elevation: 10.0,
+      color: Colors.white,
       child: Container(
         width: width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
         child: Column(
           children: [
@@ -290,7 +308,13 @@ class CardUserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     return Card(
-      child: Padding(
+      elevation: 10.0,
+      color: Colors.white,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         child: Column(
           children: [
