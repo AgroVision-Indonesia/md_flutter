@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:md_flutter/module/auth/screen/detection/detection_list_view.dart';
+import 'package:md_flutter/module/auth/screen/detection/detection_request_modal.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:md_flutter/utility/http_service.dart';
 
@@ -13,6 +14,27 @@ class DetectionHome extends StatefulWidget {
 }
 
 class _DetectionHomeState extends State<DetectionHome> {
+  void showModalRequest({
+    double elevation = 1,
+    BuildContext? context,
+    int dataLength = 2,
+  }) {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      elevation: 0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+      ),
+      context: context!,
+      builder: (context) {
+        return DetectionRequestModal(
+          onSubmit: () {},
+        );
+      },
+    );
+  }
+
   Widget buildAppbar() {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -155,39 +177,44 @@ class _DetectionHomeState extends State<DetectionHome> {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 24),
       elevation: 10.0,
-      child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-          ),
-          child: Row(
-            children: [
-              Image.asset('assets/detection_home/img_detection_request.png', width: 50),
-              const SizedBox(width: 12),
-              const Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Mau request buah atau tanaman?',
-                      style: TextStyle(
-                        fontSize: 12,
+      child: InkWell(
+        onTap: () {
+          showModalRequest(context: context);
+        },
+        child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            child: Row(
+              children: [
+                Image.asset('assets/detection_home/img_detection_request.png', width: 50),
+                const SizedBox(width: 12),
+                const Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Mau request buah atau tanaman?',
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 2),
-                    Text(
-                      'Kamu butuh buah dan tanaman lain? Requst disini',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w400,
+                      SizedBox(height: 2),
+                      Text(
+                        'Kamu butuh buah dan tanaman lain? Requst disini',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          )),
+                    ],
+                  ),
+                )
+              ],
+            )),
+      ),
     );
   }
 
