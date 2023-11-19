@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:md_flutter/component/loading_overlay.dart';
-import 'package:md_flutter/module/auth/screen/detection/detection_result.dart';
+import 'package:md_flutter/module/auth/screen/detection/detection_result_view.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:md_flutter/utility/http_service.dart';
 

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:md_flutter/component/image_picker_handler.dart';
 import 'package:md_flutter/component/loading_overlay.dart';
-import 'package:md_flutter/module/auth/screen/detection/detection_preview.dart';
+import 'package:md_flutter/module/auth/screen/detection/detection_preview_view.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:md_flutter/utility/http_service.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:md_flutter/module/auth/screen/detection/detection_list.dart';
+import 'package:md_flutter/module/auth/screen/detection/detection_list_view.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:md_flutter/utility/http_service.dart';
 
