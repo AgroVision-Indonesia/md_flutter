@@ -1,4 +1,7 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
+import 'package:md_flutter/utility/constant.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Helper {
@@ -23,5 +26,26 @@ class Helper {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  void showToast({
+    required String message,
+    Color backgroundColor = Constant.greenMedium,
+    Color messageColor = Colors.white,
+    Color borderColor = Colors.white,
+    Widget? icon,
+  }) {
+    Flushbar(
+      icon: icon,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      margin: const EdgeInsets.fromLTRB(24, 24, 24, 72),
+      flushbarPosition: FlushbarPosition.BOTTOM,
+      borderColor: borderColor,
+      borderRadius: BorderRadius.circular(8),
+      message: message,
+      messageColor: messageColor,
+      duration: const Duration(seconds: 3),
+      backgroundColor: backgroundColor,
+    ).show(context);
   }
 }

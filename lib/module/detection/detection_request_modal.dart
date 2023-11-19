@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:md_flutter/module/detection/components/expanded_section.dart';
 import 'package:md_flutter/utility/constant.dart';
+import 'package:md_flutter/utility/helper.dart';
 
 class DetectionRequestModal extends StatefulWidget {
   const DetectionRequestModal({
@@ -308,13 +309,25 @@ class _DetectionRequestModalState extends State<DetectionRequestModal> {
                     ),
                     SizedBox(height: 24),
                     buildButton(
-                        buttonLabel: 'Submit',
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        isActive: selectedTypeController.text.isNotEmpty &&
-                            nameController.text.isNotEmpty &&
-                            reasonController.text.isNotEmpty),
+                      buttonLabel: 'Submit',
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Helper(context: context).showToast(
+                          message: 'Request telah dikirim',
+                          backgroundColor: Constant.greenMoreVeryLight,
+                          borderColor: Constant.greenMoreVeryLight,
+                          messageColor: Colors.black,
+                          icon: Image.asset(
+                            'assets/detection_home/img_check_circle.png',
+                            width: 36,
+                            height: 36,
+                          ),
+                        );
+                      },
+                      isActive: selectedTypeController.text.isNotEmpty &&
+                          nameController.text.isNotEmpty &&
+                          reasonController.text.isNotEmpty,
+                    ),
                   ],
                 ),
               ),
