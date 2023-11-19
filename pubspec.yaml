@@ -84,6 +84,7 @@ flutter:
     - assets/chatbot/
     - assets/main_menu/
     - assets/auth/
+    - assets/profile/
     - assets/detection_home/
     - assets/
   #   - images/a_dot_burr.jpeg
