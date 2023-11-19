@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:md_flutter/module/home/screen/home/home_view.dart';
-import 'package:md_flutter/module/auth/screen/detection/detection_home_view.dart';
+import 'package:md_flutter/module/detection/detection_home_view.dart';
 import 'package:md_flutter/module/profile/screen/main_profile/main_profile_view.dart';
 import 'package:md_flutter/utility/constant.dart';
 
