@@ -49,6 +49,9 @@ dependencies:
   url_launcher: 
   localstorage: 
   rflutter_alert: 
+  firebase_core:
+  firebase_auth:
+  google_sign_in:
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "529934951981",
+    "project_id": "capstone-project-386912",
+    "storage_bucket": "capstone-project-386912.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529934951981:android:7bd694f147dc55ef7f3aa4",
+        "android_client_info": {
+          "package_name": "com.agrovision.md_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529934951981-pqet0v3snsfo84upqpnjskjuktlaloeb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbziYiPjJSs5OQX3OEFxz0xZkViW-ya_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529934951981-nsdenmscmti27jgfjtp52c94mr0nrg3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
