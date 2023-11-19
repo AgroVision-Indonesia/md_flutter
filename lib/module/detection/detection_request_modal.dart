@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:md_flutter/module/detection/components/expanded_section.dart';
 import 'package:md_flutter/utility/constant.dart';
 
 class DetectionRequestModal extends StatefulWidget {
@@ -28,6 +29,39 @@ class _DetectionRequestModalState extends State<DetectionRequestModal> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Widget buildButton({
+    required String buttonLabel,
+    required Function() onTap,
+    bool isActive = false,
+    Color backgroundColor = Constant.greenDark,
+    Color labelColor = Colors.white,
+  }) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 24),
+      child: InkWell(
+        customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+        onTap: isActive ? onTap : null,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32),
+            color: isActive ? backgroundColor : Colors.grey.shade500,
+            border: Border.all(
+              width: 2,
+              color: labelColor,
+            ),
+          ),
+          child: Text(
+            buttonLabel,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: labelColor, fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget buildFormTextField({
@@ -99,7 +133,7 @@ class _DetectionRequestModalState extends State<DetectionRequestModal> {
                 Text(
                   controller.text.isEmpty ? 'Pilih jenis' : controller.text,
                   style: TextStyle(
-                    color: Constant.greyDark,
+                    color: controller.text.isEmpty ? Constant.greyDark : Colors.black,
                     fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
@@ -112,6 +146,64 @@ class _DetectionRequestModalState extends State<DetectionRequestModal> {
               ],
             ),
           ),
+          Material(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
+            elevation: 2,
+            child: ExpandedSection(
+              expand: isStrechedDrowDown,
+              height: 100,
+              child: ListView.builder(
+                itemCount: options.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedTypeController.text = options.elementAt(index);
+                        isStrechedDrowDown = !isStrechedDrowDown;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      margin: EdgeInsets.only(top: 8, left: 12, right: 12),
+                      decoration: BoxDecoration(
+                        color: options.elementAt(index) == selectedTypeController.text
+                            ? Constant.greenMedium
+                            : Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        options.elementAt(index),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: options.elementAt(index) == selectedTypeController.text
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  );
+                  // return RadioListTile(
+                  //   title: Text(
+                  //     options.elementAt(index),
+                  //     style: TextStyle(fontSize: 12),
+                  //   ),
+                  //   value: index,
+                  //   groupValue: selectedTypeController.text,
+                  //   onChanged: (val) {
+                  //     setState(() {
+                  //       selectedTypeController.text = val as String;
+                  //       selectedTypeController.text = options.elementAt(index);
+                  //     });
+                  //   },
+                  // );
+                },
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -126,99 +218,109 @@ class _DetectionRequestModalState extends State<DetectionRequestModal> {
         minChildSize: 0.4,
         maxChildSize: 0.9,
         builder: (_, controller) => Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              color: Colors.white,
-            ),
-            padding: const EdgeInsets.only(top: 12, right: 24, left: 24, bottom: 40),
-            child: Stack(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      width: 28,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade400,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            color: Colors.white,
+          ),
+          padding: const EdgeInsets.only(top: 12, right: 24, left: 24, bottom: 40),
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    width: 28,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(2),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: 20,
-                        ),
-                        const Text(
-                          "Request",
-                          style: TextStyle(fontSize: 16, color: Colors.black),
-                        ),
-                        InkWell(
-                          customBorder: const CircleBorder(),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Icon(Icons.close_rounded, color: Colors.black),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 56),
-                  child: ListView(
-                    controller: controller,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Apa request khusus yang ingin Anda ajukan pada AgroVision?',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      SizedBox(
+                        width: 20,
                       ),
-                      SizedBox(height: 12),
-                      Text(
-                        'Jenis',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
+                      const Text(
+                        "Request",
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
-                      SizedBox(height: 8),
-                      buildFormDropdown(controller: selectedTypeController, options: typeList),
-                      SizedBox(height: 12),
-                      Text(
-                        'Nama',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      buildFormTextField(
-                        controller: nameController,
-                        hintText: 'Nama buah atau tanaman',
-                        minLines: 1,
-                      ),
-                      SizedBox(height: 12),
-                      Text(
-                        'Alasan',
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      buildFormTextField(
-                        controller: reasonController,
-                        hintText: 'Sebutkan alasan anda merequest buah atau tanaman ini',
-                        minLines: 3,
+                      InkWell(
+                        customBorder: const CircleBorder(),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Icon(Icons.close_rounded, color: Colors.black),
                       ),
                     ],
                   ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 56),
+                child: ListView(
+                  controller: controller,
+                  children: [
+                    Text(
+                      'Apa request khusus yang ingin Anda ajukan pada AgroVision?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      'Jenis',
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    buildFormDropdown(controller: selectedTypeController, options: typeList),
+                    SizedBox(height: 12),
+                    Text(
+                      'Nama',
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    buildFormTextField(
+                      controller: nameController,
+                      hintText: 'Nama buah atau tanaman',
+                      minLines: 1,
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      'Alasan',
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    buildFormTextField(
+                      controller: reasonController,
+                      hintText: 'Sebutkan alasan anda merequest buah atau tanaman ini',
+                      minLines: 3,
+                    ),
+                    SizedBox(height: 24),
+                    buildButton(
+                        buttonLabel: 'Submit',
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        isActive: selectedTypeController.text.isNotEmpty &&
+                            nameController.text.isNotEmpty &&
+                            reasonController.text.isNotEmpty),
+                  ],
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
