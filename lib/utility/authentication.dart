@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:md_flutter/module/auth/screen/login/login_view_model.dart';
 import 'package:md_flutter/module/auth/screen/register/register_view_model.dart';
 import 'package:provider/provider.dart';
@@ -73,9 +74,54 @@ class Authentication {
     }
   }
 
+  static Future<User?> signInWithGoogle({required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    var error;
+
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+
+    final GoogleSignInAccount? googleSignInAccount =
+    await googleSignIn.signIn();
+
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+
+      try {
+        final UserCredential userCredential =
+        await auth.signInWithCredential(credential);
+
+        user = userCredential.user;
+        LoginViewModel.onCallBackLogin(context: context);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'account-exists-with-different-credential') {
+          error = 'The account already exists with a different credential.';
+        } else if (e.code == 'invalid-credential') {
+          error = 'Error occurred while accessing credentials. Try again.';
+        }
+      } catch (e) {
+        error = 'Error occurred while accessing credentials. Try again.';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        customSnackBar(
+          content: error,
+          context: context,
+        ),
+      );
+    }
+    return user;
+  }
+
   static void signOut({required BuildContext context}) async {
     try {
       await FirebaseAuth.instance.signOut();
+      await GoogleSignIn().disconnect();
       navigateToLoginScreen(context: context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

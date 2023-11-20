@@ -147,7 +147,7 @@ class LoginView extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        // Authentication.signInWithGoogle(context: context);
+                        Authentication.signInWithGoogle(context: context);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
