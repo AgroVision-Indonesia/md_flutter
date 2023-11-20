@@ -3,6 +3,7 @@ import 'package:md_flutter/component/custom_text_input.dart';
 import 'package:md_flutter/module/auth/screen/register/register_view_model.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:provider/provider.dart';
+import '../../../../utility/authentication.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -152,6 +153,9 @@ class RegisterView extends StatelessWidget {
                       height: 24,
                     ),
                     InkWell(
+                      onTap: () {
+                        Authentication.createUserWithEmailAndPassword(context: context);
+                      },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.symmetric(vertical: 14),

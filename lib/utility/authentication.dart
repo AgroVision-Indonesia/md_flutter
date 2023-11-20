@@ -14,7 +14,12 @@ import '../module/profile/screen/main_profile/main_profile_view_model.dart';
 import 'firebase_options.dart';
 
 class Authentication {
-
+  static var provider;
+  static var uid;
+  static var name;
+  static var emailAddress;
+  static var password;
+  static var profilePhoto;
 
   Authentication() {}
 
@@ -38,10 +43,45 @@ class Authentication {
         } else {
           print('User is signed in!');
           LoginViewModel.onCallBackLogin(context: context);
-          // getData();
+          getData();
         }
       });
     });
+  }
+
+  static void createUserWithEmailAndPassword({required BuildContext context}) async {
+    final registerViewModel = context.read<RegisterViewModel>();
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: registerViewModel.emailController.text,
+        password: registerViewModel.passwordController.text,
+      ).then((value) async {
+        await value.user?.updateDisplayName(registerViewModel.nameController.text);
+      }).then((value) async {
+        await FirebaseAuth.instance.signOut();
+        registerViewModel.navigateToLoginScreen(context: context);
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          customSnackBar(
+            content: 'The password provided is too weak.',
+            context: context,
+          ),
+        );
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          customSnackBar(
+            content: 'The account already exists for that email.',
+            context: context,
+          ),
+        );
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   static void signInWithEmailPassword({required BuildContext context}) async {
@@ -137,6 +177,37 @@ class Authentication {
     Navigator.of(context).pushReplacement(CupertinoPageRoute(
       builder: (context) => const LoginScreen(),
     ));
+  }
+
+  static void updateProfile({required BuildContext context}) async {
+    final profileViewModel = context.read<MainProfileViewModel>();
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      await user.updateDisplayName(profileViewModel.name.text)
+      .then((value) {
+        user.updateEmail(profileViewModel.email.text);
+      }).then((value) {
+        user.updatePassword(profileViewModel.password.text);
+      });
+    }
+  }
+
+  static void getData() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      for (final providerProfile in user.providerData) {
+        // ID of the provider (google.com, apple.com, etc.)
+        provider = providerProfile.providerId;
+
+        // UID specific to the provider
+        uid = providerProfile.uid;
+
+        // Name, email address, and profile photo URL
+        name = providerProfile.displayName;
+        emailAddress = providerProfile.email;
+        profilePhoto = providerProfile.photoURL;
+      }
+    }
   }
 
   static SnackBar customSnackBar({required String content, required BuildContext context}) {

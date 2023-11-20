@@ -117,7 +117,7 @@ class CardSaveNewDataOptions extends StatelessWidget {
                 InkWell(
                   borderRadius: BorderRadius.circular(16),
                   onTap: () {
-                    // Authentication.updateProfile(context: context);
+                    Authentication.updateProfile(context: context);
                   },
                   child: Container(
                     width: width * 0.3,
@@ -345,8 +345,8 @@ class CardUserInfo extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Rama Htamah',
-                      // Authentication.name.toString(),
+                      // 'Rama Htamah',
+                      Authentication.name.toString(),
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

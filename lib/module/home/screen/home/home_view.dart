@@ -6,6 +6,8 @@ import 'package:md_flutter/module/chatbot/screen/chat/chatbot_view.dart';
 import 'package:md_flutter/module/home/screen/home/components/card_article.dart';
 import 'package:md_flutter/utility/constant.dart';
 
+import '../../../../utility/authentication.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -32,6 +34,7 @@ class _HomeState extends State<Home> {
           ),
           CircleAvatar(
             radius: 20,
+            // backgroundImage: Authentication.profilePhoto != null ? Authentication.profilePhoto : NetworkImage(Constant.randomImageUrl),
             backgroundImage: NetworkImage(Constant.randomImageUrl),
           )
         ],
@@ -79,7 +82,8 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     Text(
-                      '${userData['username']}👋',
+                      Authentication.name != null ? Authentication.name : 'User' + ' 👋',
+                      // '${userData['username']}👋',
                       style: TextStyle(
                         fontSize: 16,
                         color: Constant.greenMedium,
