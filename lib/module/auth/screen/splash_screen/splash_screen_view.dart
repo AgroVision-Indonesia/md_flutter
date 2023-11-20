@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:md_flutter/module/auth/screen/onboarding/onboarding_view.dart';
 import 'package:md_flutter/module/auth/screen/splash_screen/splash_screen_view_model.dart';
 import 'package:provider/provider.dart';
+import '../../../../utility/authentication.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -33,17 +31,8 @@ class SplashScreenView extends StatefulWidget {
 class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   void initState() {
-    startSplash();
+    Authentication.checkAuth(context: context);
     super.initState();
-  }
-
-  void startSplash() {
-    var duration = const Duration(seconds: 3);
-    Timer(duration, () {
-      Navigator.of(context).pushReplacement(CupertinoPageRoute(
-        builder: (context) => const OnboardingScreen(),
-      ));
-    });
   }
 
   void showToast(String message) {

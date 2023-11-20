@@ -1,10 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:md_flutter/module/home/screen/main_menu/main_menu_view.dart';
 import 'package:md_flutter/module/auth/screen/splash_screen/splash_screen_view.dart';
+import 'package:md_flutter/utility/authentication.dart';
 import 'package:md_flutter/utility/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  Authentication.initializeFirebase();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(

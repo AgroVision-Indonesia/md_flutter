@@ -4,6 +4,8 @@ import 'package:md_flutter/module/profile/screen/main_profile/main_profile_view_
 import 'package:md_flutter/utility/constant.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../utility/authentication.dart';
+
 class MainProfileScreen extends StatelessWidget {
   const MainProfileScreen({super.key});
 
@@ -114,7 +116,9 @@ class CardSaveNewDataOptions extends StatelessWidget {
               children: [
                 InkWell(
                   borderRadius: BorderRadius.circular(16),
-                  onTap: () {},
+                  onTap: () {
+                    // Authentication.updateProfile(context: context);
+                  },
                   child: Container(
                     width: width * 0.3,
                     padding: EdgeInsets.symmetric(vertical: 6),
@@ -136,7 +140,9 @@ class CardSaveNewDataOptions extends StatelessWidget {
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(16),
-                  onTap: () {},
+                  onTap: () {
+                    viewModel.onTapEditButton();
+                  },
                   child: Container(
                     width: width * 0.3,
                     padding: EdgeInsets.symmetric(vertical: 6),
@@ -183,7 +189,9 @@ class CardMoreOptions extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                // TODO
+              },
               child: Text(
                 'Pengaturan',
                 style: TextStyle(
@@ -196,7 +204,9 @@ class CardMoreOptions extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                // TODO
+              },
               child: Text(
                 'Tentang',
                 style: TextStyle(
@@ -209,7 +219,9 @@ class CardMoreOptions extends StatelessWidget {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Authentication.signOut(context: context);
+              },
               child: Text(
                 'Logout',
                 style: TextStyle(
@@ -307,6 +319,7 @@ class CardUserInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
+
     return Card(
       elevation: 10.0,
       color: Colors.white,
@@ -321,7 +334,8 @@ class CardUserInfo extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: Constant.greenDark,
+                  // backgroundImage: Authentication.profilePhoto != null ? Authentication.profilePhoto : NetworkImage(Constant.randomImageUrl),
+                  backgroundImage: NetworkImage(Constant.randomImageUrl),
                   radius: 31,
                 ),
                 SizedBox(
@@ -332,6 +346,7 @@ class CardUserInfo extends StatelessWidget {
                   children: [
                     Text(
                       'Rama Htamah',
+                      // Authentication.name.toString(),
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

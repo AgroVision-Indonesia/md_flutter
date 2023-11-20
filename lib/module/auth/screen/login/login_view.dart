@@ -3,6 +3,7 @@ import 'package:md_flutter/component/custom_text_input.dart';
 import 'package:md_flutter/module/auth/screen/login/login_view_model.dart';
 import 'package:md_flutter/utility/constant.dart';
 import 'package:provider/provider.dart';
+import 'package:md_flutter/utility/authentication.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -126,7 +127,7 @@ class LoginView extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        viewModel.onCallBackLogin(context: context);
+                        Authentication.signInWithEmailPassword(context: context);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
@@ -146,7 +147,7 @@ class LoginView extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        //TODO
+                        // Authentication.signInWithGoogle(context: context);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
