@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "529934951981-3oicj0qn8hjpc35nl030epa8557p67db.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.agrovision.md_flutter",
+            "certificate_hash": "3f308a1c0a03757f00ef8cec93122b973db23770"
+          }
+        },
+        {
           "client_id": "529934951981-pqet0v3snsfo84upqpnjskjuktlaloeb.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "529934951981-nsdenmscmti27jgfjtp52c94mr0nrg3j.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "529934951981-onpra40bo6tuqcgd1fu0o4fqlu7cjiqa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.agrovision.mdFlutter"
+              }
             }
           ]
         }
