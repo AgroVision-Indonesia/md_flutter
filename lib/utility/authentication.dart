@@ -46,18 +46,28 @@ class Authentication {
   static void signInWithEmailPassword({required BuildContext context}) async {
     final loginViewModel = context.read<LoginViewModel>();
     try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: loginViewModel.emailController.text,
           password: loginViewModel.passwordController.text
       );
-      if (userCredential.user != null) {
-        LoginViewModel.onCallBackLogin(context: context);
+      LoginViewModel.onCallBackLogin(context: context);
+    } on FirebaseAuthException catch (e) {
+      var error;
+      if (e.code == 'user-not-found') {
+        error = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        error = 'Wrong password provided for that user.';
+      } else if (e.code == 'channel-error') {
+        error = 'Field is empty.';
+      } else if (e.code == 'invalid-email') {
+        error = 'The email address is badly formatted.';
+      } else {
+        error = 'Error logging in. Try again.';
       }
-    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         customSnackBar(
-          content:
-          e.toString(),
+          content: error,
+          context: context,
         ),
       );
     }
@@ -71,6 +81,7 @@ class Authentication {
       ScaffoldMessenger.of(context).showSnackBar(
         customSnackBar(
           content: 'Error signing out. Try again.',
+          context: context,
         ),
       );
     }
@@ -82,14 +93,24 @@ class Authentication {
     ));
   }
 
-  static SnackBar customSnackBar({required String content}) {
+  static SnackBar customSnackBar({required String content, required BuildContext context}) {
     return SnackBar(
-      backgroundColor: Colors.black,
-      content: Text(
-        content,
-        style: TextStyle(color: Colors.redAccent, letterSpacing: 0.5),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      content: Container(
+        margin: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.25, vertical: 10),
+        padding: const EdgeInsets.all(2),
+        decoration: BoxDecoration(color: Colors.black45, borderRadius: BorderRadius.circular(4)),
+        child: Text(
+          content,
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 16,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
-
 }
