@@ -122,46 +122,51 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildCardDetection() {
-    return Container(
-      margin: const EdgeInsets.only(right: 54, left: 54),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: Constant.greenMedium,
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            'assets/main_menu/img_lamp.png',
-            width: 32,
-          ),
-          const SizedBox(width: 6),
-          const Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Deteksi sekarang!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                  ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Cek kematangan buah dan penyakit tanaman dengan mudah dan praktis, hanya dengan kamera',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 8,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
+    return InkWell(
+      onTap: () {
+        //TODO: Navigate to detection screen
+      },
+      child: Container(
+        margin: const EdgeInsets.only(right: 54, left: 54),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Constant.greenMedium,
+        ),
+        child: Row(
+          children: [
+            Image.asset(
+              'assets/main_menu/img_lamp.png',
+              width: 32,
             ),
-          ),
-          const SizedBox(width: 6),
-          const Icon(IconlyBroken.arrow_right, color: Colors.white),
-        ],
+            const SizedBox(width: 6),
+            const Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Deteksi sekarang!',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'Cek kematangan buah dan penyakit tanaman dengan mudah dan praktis, hanya dengan kamera',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 6),
+            const Icon(IconlyBroken.arrow_right, color: Colors.white),
+          ],
+        ),
       ),
     );
   }
