@@ -23,7 +23,7 @@ class _MainMenuState extends State<MainMenu> {
 
   Widget body() {
     List pages = [
-      const Home(),
+      Home(moveToAnotherTab: onItemTapped),
       const DetectionHome(),
       const MainProfileScreen(),
     ];

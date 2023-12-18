@@ -9,7 +9,9 @@ import 'package:md_flutter/utility/constant.dart';
 import '../../../../utility/authentication.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key, required this.moveToAnotherTab});
+
+  final Function(int) moveToAnotherTab;
 
   @override
   State<Home> createState() => _HomeState();
@@ -124,10 +126,9 @@ class _HomeState extends State<Home> {
   Widget buildCardDetection() {
     return InkWell(
       onTap: () {
-        //TODO: Navigate to detection screen
+        widget.moveToAnotherTab(1);
       },
       child: Container(
-        margin: const EdgeInsets.only(right: 54, left: 54),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -270,7 +271,9 @@ class _HomeState extends State<Home> {
             Stack(
               children: [
                 buildCardDashboard(),
-                Container(margin: const EdgeInsets.only(top: 100), child: buildCardDetection()),
+                Container(
+                    margin: const EdgeInsets.only(top: 100, right: 54, left: 54),
+                    child: buildCardDetection()),
               ],
             ),
             buildArtikel(),
